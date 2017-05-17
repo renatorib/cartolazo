@@ -18,7 +18,7 @@ const Block = ({ href, prefetch, replace, ...props }) => {
   );
 };
 
-const isLink = props => (props.onClick || props.href);
+const isLink = props => (!!props.href);
 const BlockElement = styled.div`
   cursor: ${props => isLink(props) ? 'pointer' : 'default'};
   padding: ${ui('padding', 'spacing', 2)} 0;
@@ -37,7 +37,6 @@ const BlockElement = styled.div`
 
   img {
     vertical-align: middle;
-    padding-right: 10px;
   }
 `;
 

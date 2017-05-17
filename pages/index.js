@@ -1,26 +1,47 @@
 import React, { Component } from 'react';
-import { BlockLink, Header, Page } from '../components';
+import { Block, BlockLink, Header, Page, Right } from '../components';
+import { api, loader } from '../utils';
 
 const links = [{
-  href: '/destaques',
-  children: 'Mais escalados da rodada',
+  href: '/mais-escalados',
+  children: 'Mais escalados da Rodada',
 }, {
   href: '/parciais',
-  children: 'Parciais',
+  children: 'Parciais da Rodada',
+}, {
+  href: '/partidas',
+  children: 'Partidas da Rodada',
 }];
 
 class Index extends Component {
-  componentDidMount() {
-    // silent
+  state = {
+    status: null,
+  };
+
+  componentWillMount() {
+    api.setState('/mercado/status', 'status', this);
   }
 
   render() {
+    const { status } = this.state;
+
     return (
       <Page>
-        <Header>Next Status</Header>
+        <Header>Cartolazo</Header>
 
-        {links.map(link => (
-          <BlockLink icon="IcChevronRightTiny" {...link} />
+        {loader(!status, null, () => (
+          <div>
+            <Block theme="cloud">
+              <strong>Rodada {status.rodadaAtual}</strong>
+              <Right className="bold">
+                Mercado {status.statusMercado ? 'Aberto' : 'Fechado'}
+              </Right>
+            </Block>
+
+            {links.map(link => (
+              <BlockLink icon="IcChevronRightTiny" {...link} />
+            ))}
+          </div>
         ))}
       </Page>
     );

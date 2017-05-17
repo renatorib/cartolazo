@@ -3,5 +3,5 @@ import { LoadingState } from '../components';
 
 export default (condition, message, render) =>
   condition
-    ? <LoadingState>{message}</LoadingState>
+    ? (message && <LoadingState>{message}</LoadingState>)
     : render();

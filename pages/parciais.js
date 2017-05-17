@@ -12,15 +12,11 @@ import { storage, loader } from '../utils';
 const Wrapper = styled.div``;
 
 class Parciais extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      filter: '',
-      loaded: false,
-      lists: [],
-    };
-  }
+  state = {
+    filter: '',
+    loaded: false,
+    lists: [],
+  };
 
   componentDidMount() {
     this.setState({ // eslint-disable-line

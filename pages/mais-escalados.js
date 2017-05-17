@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Block, Header, Right, Page } from '../components';
 import { api, loader } from '../utils';
 
-class Destaques extends Component {
+class MaisEscalados extends Component {
   state = {
     status: null,
     destaques: null,
   };
 
-  componentDidMount() {
+  componentWillMount() {
     api.setState('/mercado/status', 'status', this);
     api.setState('/mercado/destaques', 'destaques', this);
   }
@@ -30,7 +30,7 @@ class Destaques extends Component {
                 <Right className="bold">{status.timesEscalados}</Right>
               </Block>
               {destaques.map((destaque, i) => (
-                <JogadorDestaque
+                <Jogador
                   {...destaque}
                   total={status.timesEscalados}
                   key={destaque.atleta.atletaId}
@@ -45,13 +45,13 @@ class Destaques extends Component {
   }
 }
 
-const JogadorDestaque = ({ atleta, posicao, escalacoes, escudoClube, ordem, total }) => (
+const Jogador = ({ atleta, posicao, escalacoes, escudoClube, ordem, total }) => (
   <Block theme="light" padding={0} key={atleta.atletaId} className="destaque">
-    <span className="small">{ordem < 10 ? `0${ordem}` : ordem} </span>
-    <span className="img"><img src={escudoClube} height={20} alt="" /></span>
-    <span className="pos x-small bold">{posicao.substring(0, 3).toUpperCase()} </span>
-    <span className="name">{atleta.apelido}</span>
-    <Right className="small data">
+    <span className="item ord small">{ordem < 10 ? `0${ordem}` : ordem} </span>
+    <span className="item img"><img src={escudoClube} height={20} alt="" /></span>
+    <span className="item pos x-small bold">{posicao.substring(0, 3).toUpperCase()} </span>
+    <span className="item name">{atleta.apelido}</span>
+    <Right className="item data small">
       {Math.round((escalacoes / total) * 100)}% - <span className="bold">{escalacoes}</span>
     </Right>
   </Block>
@@ -59,7 +59,12 @@ const JogadorDestaque = ({ atleta, posicao, escalacoes, escudoClube, ordem, tota
 
 const Wrapper = styled.div`
   .destaque > div {
-    position: relative;
+    display: flex;
+    align-items: center;
+
+    > .item:not(:last-of-type) {
+      padding-right: 10px;
+    }
   }
 
   .pos {
@@ -69,15 +74,18 @@ const Wrapper = styled.div`
   }
 
   .data {
-    position: absolute;
-    right: 0;
-    padding: 1px 10px;
+    padding-left: 10px;
+    margin-left: auto;
     background: white;
+    white-space: nowrap;
   }
 
   .name {
     white-space: nowrap;
+    overflow-x: hidden;
+    display: block;
+    text-overflow: ellipsis;
   }
 `;
 
-export default Destaques;
+export default MaisEscalados;
