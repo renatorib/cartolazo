@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "grid-styled": "^1.0.1",
     "humps": "^2.0.0",
     "next": "latest",
     "nprogress": "^0.2.0",
