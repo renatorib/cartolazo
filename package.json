@@ -1,8 +1,8 @@
 {
-  "name": "next-cartola",
+  "name": "cartolazo",
   "version": "1.0.0",
   "author": "Renato Ribeiro <http://github.com/renatorib>",
-  "repository": "http://github.com/renatorib/next-cartola",
+  "repository": "http://github.com/renatorib/cartolazo",
   "scripts": {
     "reicons": "reicons -p icons:ic -s assets -b components/Icons",
     "dev": "yarn reicons && node server.js",
