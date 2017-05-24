@@ -1,93 +1,119 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { v4 } from 'uuid';
 import R from 'ramda';
-import {
-  Header, BlockSearch, EmptyState,
-  BlockInput, Bottom, BlockLink,
-  Page,
-} from '../components';
-import { storage, loader } from '../utils';
+import { Block, BlockSearch, Header, Right, Page } from '../components';
+import { api, loader, string } from '../utils';
 
-const Wrapper = styled.div``;
+const { standardize } = string;
 
 class Parciais extends Component {
   state = {
     filter: '',
-    loaded: false,
-    lists: [],
+    data: null,
   };
 
   componentDidMount() {
-    this.setState({ // eslint-disable-line
-      lists: storage.get('lists') || [],
-      loaded: true,
-    });
+    api.setState('/atletas/pontuados', 'data', this);
   }
 
-  updateLists = () => {
-    storage.set('lists', this.state.lists);
-  };
-
-  createList = (name) => {
-    const list = { id: v4(), name, times: [] };
-    this.setState({
-      lists: [...this.state.lists, list],
-    }, this.updateLists);
-  };
-
-  handleSearch = (e) => {
+  handleFilter = (e) => {
     this.setState({
       filter: e.target.value,
     });
   }
 
+  refresh = () => {
+    this.setState({ data: null });
+    api.setState('/atletas/pontuados', 'data', this);
+  }
+
   render() {
-    const { lists, filter, loaded } = this.state;
-    const showLists = mapper => R.compose(
+    const { data, filter } = this.state;
+
+    const showPlayers = mapper => R.compose(
       R.map(mapper),
-      R.filter(list => R.contains(filter.toLowerCase(), list.name.toLowerCase())),
-    )(lists);
+      R.reverse,
+      R.sortBy(R.prop('pontuacao')),
+      R.filter(atleta => R.contains(standardize(filter), standardize(atleta.apelido))),
+      R.filter(atleta => atleta.apelido),
+    )(data.atletas ? Object.values(data.atletas) : []);
 
     return (
       <Page>
-        <Header left="IcChevronLeft" leftLink="/">
-          Parciais
+        <Header left="IcChevronLeft" leftLink="/" right="IcRefresh" rightClick={this.refresh}>
+          Parciais dos Atletas
         </Header>
+        <BlockSearch onChange={this.handleFilter} />
         <Wrapper>
-
-          {lists.length > 6 && (
-            <BlockSearch onChange={this.handleSearch} />
-          )}
-
-          {loader(!loaded, 'Carregando listas...', () => (
-            lists.length === 0 ? (
-              <EmptyState icon="IcDocuments">
-                <strong>Você ainda não tem nenhuma lista.</strong><br />
-                Crie uma lista no campo fixado na parte de baixo da sua tela
-                e adicione times para acompanhar suas parciais.
-              </EmptyState>
-            ) : (
-              showLists(list => (
-                <BlockLink key={list.id} href={`/lista?id=${list.id}`} icon="IcChevronRightTiny">
-                  {list.name}
-                </BlockLink>
-              ))
-            )
-          ))}
-
-          <Bottom height={100}>
-            <BlockInput
-              placeholder="Crie uma nova lista"
-              icon="IcAdd"
-              clearOnSubmit
-              onSubmit={this.createList}
-            />
-          </Bottom>
+          {loader(!data, 'Carregando jogadores...', () => {
+            const { clubes, posicoes } = data;
+            return (
+              <div>
+                {showPlayers(atleta => atleta.apelido && (
+                  <PontuacaoAtleta
+                    key={`${atleta.apelido}-${atleta.clubeId}`}
+                    atleta={atleta}
+                    clube={clubes[atleta.clubeId]}
+                    posicao={posicoes[atleta.posicaoId]}
+                  />
+                ))}
+              </div>
+            );
+          })}
         </Wrapper>
       </Page>
     );
   }
 }
+
+const pontuacaoColor = (pontuacao = 0) => {
+  if (pontuacao >= 0) return 'green';
+  if (pontuacao < 0) return 'red';
+  return '';
+};
+
+const PontuacaoAtleta = ({ atleta, clube, posicao }) => (
+  <Block theme="light" padding={0} key={atleta.atletaId} className="atleta">
+    <span className="item img"><img src={clube && clube.escudos['30x30']} height={20} alt="" /></span>
+    <span className="item pos x-small bold">{posicao && posicao.abreviacao.toUpperCase()} </span>
+    <span className="item name">{atleta.apelido}</span>
+    <Right className="item data">
+      <span className={`bold ${pontuacaoColor(atleta.pontuacao)}`}>
+        {atleta.pontuacao && atleta.pontuacao.toFixed(2)}
+      </span>
+    </Right>
+  </Block>
+);
+
+const Wrapper = styled.div`
+  .atleta > div {
+    display: flex;
+    align-items: center;
+
+    > .item:not(:last-of-type) {
+      padding-right: 10px;
+    }
+  }
+
+  .pos {
+    letter-spacing: 1px;
+    display: inline-block;
+    width: 25px;
+  }
+
+  .data {
+    padding-left: 10px;
+    margin-left: auto;
+    background: white;
+    white-space: nowrap;
+  }
+
+  .name {
+    white-space: nowrap;
+    overflow-x: hidden;
+    display: block;
+    text-overflow: ellipsis;
+  }
+`;
 
 export default Parciais;

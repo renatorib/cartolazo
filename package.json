@@ -5,21 +5,22 @@
   "repository": "http://github.com/renatorib/cartolazo",
   "scripts": {
     "reicons": "reicons -p icons:ic -s assets -b components/Icons",
-    "dev": "yarn reicons && node server.js",
+    "dev": "node next.js",
     "prebuild": "yarn reicons",
     "build": "next build",
-    "prestart": "yarn reicons",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node next.js",
     "lint": "eslint ."
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "date-fns": "^1.28.4",
     "humps": "^2.0.0",
-    "next": "latest",
+    "next": "beta",
     "nprogress": "^0.2.0",
     "ramda": "^0.23.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-virtualized": "^9.7.6",
     "styled-components": "^1.4.6",
     "uuid": "^3.0.1"
   },

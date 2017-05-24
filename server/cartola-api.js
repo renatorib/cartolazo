@@ -6,4 +6,5 @@ const api = create({
   timeout: 10000,
 });
 
-module.exports = ({ p }) => api.get(p);
+module.exports = ({ url, method, data }) =>
+  api({ method, url, data });

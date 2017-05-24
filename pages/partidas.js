@@ -4,13 +4,17 @@ import R from 'ramda';
 import { Block, Header, Page } from '../components';
 import { api, loader, date } from '../utils';
 
+const sortByDate = prop => R.sortWith([
+  R.ascend(R.prop(prop)),
+]);
+
 class Partidas extends Component {
   state = {
     partidas: null,
     showing: {},
   };
 
-  componentWillMount() {
+  componentDidMount() {
     api.setState('/partidas', 'partidas', this);
   }
 
@@ -37,7 +41,7 @@ class Partidas extends Component {
               <Block theme="cloud">
                 <strong>Rodada {partidas.rodada}</strong>
               </Block>
-              {partidas.partidas.map(partida => (
+              {sortByDate('partidaData')(partidas.partidas).map(partida => (
                 <Partida
                   id={partida.clubeCasaId}
                   key={partida.clubeCasaId}
@@ -56,6 +60,14 @@ class Partidas extends Component {
   }
 }
 
+
+const posColor = (pos) => {
+  if (pos <= 4) return 'green';
+  if (pos >= 16) return 'red';
+
+  return '';
+};
+
 const Partida = ({
   mandante, visitante, aproveitamentoMandante,
   aproveitamentoVisitante, partidaData, local,
@@ -71,28 +83,46 @@ const Partida = ({
         <span className="bold">{date.formatDate(partidaData, 'hh:ii')}</span>
       </div>
     )}
+
     <div className="confronto mono">
-      <span className="pos">{clubeCasaPosicao}º</span>
-      <span className="bullets">
-        {aproveitamentoMandante.map((apv, i) => (
-          <span className={`bullet ${apv} ${i === 4 && 'big'}`} />
-        ))}
+      <span className="retrospect">
+        <span className={`pos ${posColor(clubeCasaPosicao)}`}>
+          {clubeCasaPosicao}º
+        </span>
+        <span className="bullets">
+          {aproveitamentoMandante.map((apv, i) => i >= 2 && (
+            <span key={i} className={`bullet ${apv} ${i === 4 && 'big'}`} />
+          ))}
+        </span>
       </span>
-      <span className="nome">{mandante.abreviacao}</span>
-      <span><img src={mandante.escudos['60x60']} height="20" alt="" /></span>
+
+      <span className="time">
+        <span className="nome">{mandante.abreviacao}{' '}</span>
+        <img src={mandante.escudos['60x60']} height="20" alt="" />
+      </span>
+
       <div className="placar">
         <span>{placarOficialMandante}</span>
         <span>x</span>
         <span>{placarOficialVisitante}</span>
       </div>
-      <span><img src={visitante.escudos['60x60']} height="20" alt="" /></span>
-      <span className="nome">{visitante.abreviacao}</span>
-      <span className="bullets">
-        {R.reverse(aproveitamentoVisitante).map((apv, i) => (
-          <span className={`bullet ${apv} ${i === 0 && 'big'}`} />
-        ))}
+
+      <span className="time">
+        <img src={visitante.escudos['60x60']} height="20" alt="" />
+        <span className="nome">{' '}{visitante.abreviacao}</span>
       </span>
-      <span className="pos">{clubeVisitantePosicao}º</span>
+
+      <span className="retrospect">
+        <span className="bullets">
+          {R.reverse(aproveitamentoVisitante).map((apv, i) => i < 3 && (
+            <span key={i} className={`bullet ${apv} ${i === 0 ? 'big' : ''}`} />
+          ))}
+        </span>
+
+        <span className={`pos ${posColor(clubeVisitantePosicao)}`}>
+          {clubeVisitantePosicao}º
+        </span>
+      </span>
     </div>
   </Block>
 );
@@ -109,7 +139,7 @@ const Wrapper = styled.div`
   .confronto {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-flow: row wrap;
 
     > * {
@@ -130,7 +160,7 @@ const Wrapper = styled.div`
   .placar {
     display: flex;
     justify-content: space-between;
-    width: 50px;
+    width: 4ch;
   }
 
   .mono {
@@ -147,27 +177,33 @@ const Wrapper = styled.div`
   }
 
   .bullet {
-    width: 5px;
+    width: 6px;
+    height: 6px;
     margin: 0 1px;
-    height: 5px;
     border-radius: 99px;
     background: #fafafa;
 
     &.d { background-color: red; }
     &.v { background-color: green; }
     &.e { background-color: #ccc; }
-    &.big { height: 7px; width: 7px; }
+    &.big { height: 8px; width: 8px; }
   }
 
   .pos {
-    font-size: 14px;
-    color: #AAA;
+    font-size: 12px;
     width: 30px;
     text-align: center;
     font-family: 'Roboto';
+    opacity: 0.8;
+    font-weight: 400;
   }
 
-  @media (max-width: 359px) {
+  .retrospect {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 329px) {
     .pos {
       font-size: 10px;
       width: 20px;

@@ -48,8 +48,24 @@ injectGlobal`
     font-size: 0.5em;
   }
 
+  .big {
+    font-size: 1.3em;
+  }
+
+  .x-big {
+    font-size: 1.5em;
+  }
+
   .bold {
     font-weight: bold;
+  }
+
+  .green {
+    color: green;
+  }
+
+  .red {
+    color: red;
   }
 `;
 

@@ -1,0 +1,21 @@
+
+export default {
+  a: 'Assistência',
+  cA: 'Cartão amarelo',
+  cV: 'Cartão vermelho',
+  dP: 'Defesa de penalti',
+  dD: 'Defesa difícil',
+  fC: 'Falta cometida',
+  fS: 'Falta sofrida',
+  fD: 'Finalização defendida',
+  fT: 'Finalização na trave',
+  fF: 'Finalização para fora',
+  g: 'Gol',
+  gC: 'Gol contra',
+  gS: 'Gol sofrido',
+  i: 'Impedimento',
+  pE: 'Passe errado',
+  pP: 'Penalti perdido',
+  rB: 'Roubada de bola',
+  sG: 'Sem sofrer gols',
+};

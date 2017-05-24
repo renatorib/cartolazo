@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import { Block, BlockLink, Header, Page, Right } from '../components';
+
+import { Block, BlockLink, Header, Page, Right, Countdown } from '../components';
 import { api, loader } from '../utils';
 
-const links = [{
-  href: '/mais-escalados',
-  children: 'Mais escalados da Rodada',
-}, {
-  href: '/parciais',
-  children: 'Parciais da Rodada',
-}, {
-  href: '/partidas',
-  children: 'Partidas da Rodada',
-}];
+const linksClosed = [
+  { href: '/parciais', children: 'Parciais dos Atletas' },
+  { href: '/listas', children: 'Parciais dos Times' },
+];
+
+const linksOpened = [
+  { href: '/mais-escalados', children: 'Mais escalados da Rodada' },
+  { href: '/partidas', children: 'Partidas da Rodada' },
+  { href: '/scouts', children: 'Scouts dos Atletas' },
+];
+
+const renderLink = link => (
+  <BlockLink key={link.href} icon="IcChevronRightTiny" {...link} />
+);
 
 class Index extends Component {
   state = {
@@ -29,20 +34,34 @@ class Index extends Component {
       <Page>
         <Header>Cartolazo</Header>
 
-        {loader(!status, null, () => (
-          <div>
-            <Block theme="cloud">
-              <strong>Rodada {status.rodadaAtual}</strong>
-              <Right className="bold">
-                Mercado {status.statusMercado ? 'Aberto' : 'Fechado'}
-              </Right>
-            </Block>
+        {loader(!status, null, () => {
+          const { rodadaAtual, statusMercado, fechamento: { timestamp } } = status;
 
-            {links.map(link => (
-              <BlockLink icon="IcChevronRightTiny" {...link} />
-            ))}
-          </div>
-        ))}
+          return (
+            <div>
+              <Block theme="cloud">
+                <strong>Rodada {rodadaAtual}</strong>
+                <Right>
+                  {statusMercado === 1 ? (
+                    <small>
+                      Mercado fecha <strong>em <Countdown date={timestamp * 1000} /></strong>
+                    </small>
+                  ) : (
+                    <strong className="small red">
+                      {statusMercado === 2 && 'Mercado fechado'}
+                      {statusMercado === 3 && 'Mercado em manutenção'}
+                      {statusMercado === 4 && 'Mercado em manutenção'}
+                      {statusMercado > 4 && 'Mercado fechado'}
+                    </strong>
+                  )}
+                </Right>
+              </Block>
+
+              {statusMercado !== 1 && linksClosed.map(renderLink)}
+              {linksOpened.map(renderLink)}
+            </div>
+          );
+        })}
       </Page>
     );
   }

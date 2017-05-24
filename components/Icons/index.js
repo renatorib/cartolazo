@@ -65,6 +65,15 @@ const icons = {
       </g>
     )
   }, 
+  IcRefresh: {
+    className: 'Icon--IcRefresh',
+    viewBox: '0 0 100 100',
+    path: (
+      <g>
+        <path d="M45.9 84.5c-19.2-2.6-32.6-20.3-30-39.5 2.6-19.2 20.4-32.6 39.5-29.9 6.6.9 12.5 3.6 17.3 7.5L58.9 34.5l37.9 9.2-1.8-40-12.8 10.9C75.4 8.5 66.8 4.3 57.1 3 31.3-.6 7.4 17.5 3.8 43.3s14.5 49.8 40.4 53.3C62.1 99.1 79 91.2 89 77.5L79.3 70c-7.3 10.4-20 16.4-33.4 14.5z" />
+      </g>
+    )
+  }, 
   IcSearch: {
     className: 'Icon--IcSearch',
     viewBox: '0 0 100 100',
@@ -125,6 +134,7 @@ export const IcChevronRight = (props) => <Icon {...props} name="IcChevronRight" 
 export const IcClose = (props) => <Icon {...props} name="IcClose" />;
 export const IcDocuments = (props) => <Icon {...props} name="IcDocuments" />;
 export const IcMenu = (props) => <Icon {...props} name="IcMenu" />;
+export const IcRefresh = (props) => <Icon {...props} name="IcRefresh" />;
 export const IcSearch = (props) => <Icon {...props} name="IcSearch" />;
 export const IcTick = (props) => <Icon {...props} name="IcTick" />;
 

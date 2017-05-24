@@ -2,7 +2,9 @@
   "extends": ["airbnb"],
   "parser": "babel-eslint",
   "rules": {
+    "react/sort-comp": off,
     "react/prop-types": off,
+    "react/no-array-index-key": off,
     "react/jsx-filename-extension": off,
     "no-confusing-arrow": off,
     "no-unused-expressions": off,
