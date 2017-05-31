@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Block, BlockLink, Header, Page, Right, Countdown } from '../components';
+import { Block, BlockLink, Header, Page, Right, Countdown } from '../components/atoms';
 import { api, loader } from '../utils';
 
 const linksClosed = [

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import R from 'ramda';
-import { Block, Header, Page } from '../components';
+import { Block, Header, Page } from '../components/atoms';
 import { api, loader, date } from '../utils';
 
 const sortByDate = prop => R.sortWith([

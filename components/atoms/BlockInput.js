@@ -8,29 +8,36 @@ class BlockInput extends React.Component {
   };
 
   bindField = name => (e) => {
+    const { onChange } = this.props;
+
     this.setState({ [name]: e.target.value });
-    this.props.onChange && this.props.onChange(e, e.target.value);
+    onChange && onChange(e, e.target.value);
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { onSubmit, clearOnSubmit } = this.props;
-    const { value } = this.state;
 
-    onSubmit && onSubmit(value);
+    onSubmit && onSubmit(this.state.value);
     clearOnSubmit && this.setState({ value: '' });
   };
 
   render() {
-    const { icon, children, type, onChange, ...restProps } = this.props;
     const { value } = this.state;
+    const {
+      icon, children, type, onChange, clearOnSubmit, onSubmit,
+      ...restProps
+    } = this.props;
 
     return (
       <Wrapper>
         <Block {...restProps} theme="cloud" className="search">
-          <input type={type || 'text'} onChange={this.bindField('value')} value={value} {...restProps} />
-          <button onClick={this.handleSubmit}>
-            <Icons name={icon} size={25} />
-          </button>
+          <form onSubmit={this.handleSubmit}>
+            <input type={type || 'text'} onChange={this.bindField('value')} value={value} {...restProps} />
+            <button type="submit">
+              <Icons name={icon} size={25} />
+            </button>
+          </form>
         </Block>
       </Wrapper>
     );
@@ -41,7 +48,7 @@ const Wrapper = styled.div`
   .search {
     padding: 0;
   }
-  .search > div {
+  .search > div > form {
     display: flex;
     justify-content: space-between;
     align-items: center;

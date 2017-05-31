@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import R from 'ramda';
-import { Block, BlockSearch, Header, Right, Page } from '../components';
+import { Block, BlockSearch, Header, Right, Page } from '../components/atoms';
 import { api, loader, string } from '../utils';
 
 const { standardize } = string;

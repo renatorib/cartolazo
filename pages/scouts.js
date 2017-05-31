@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import R from 'ramda';
-import { Block, Header, Page, Right } from '../components';
+import { Block, Header, Page, Right } from '../components/atoms';
 import { api, loader, scouts } from '../utils';
 
 class Scouts extends Component {

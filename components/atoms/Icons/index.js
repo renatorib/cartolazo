@@ -65,6 +65,15 @@ const icons = {
       </g>
     )
   }, 
+  IcOps: {
+    className: 'Icon--IcOps',
+    viewBox: '0 0 26 25',
+    path: (
+      <g>
+        <g fillRule="evenodd"><path d="M1 17.006C1 18.104 1.9 19 3.008 19h19.984A1.999 1.999 0 0 0 25 17.006V2.994C25 1.896 24.1 1 22.992 1H3.008A1.999 1.999 0 0 0 1 2.994v14.012zM3.008 0h19.984A3.003 3.003 0 0 1 26 2.994v14.012A2.999 2.999 0 0 1 22.992 20H3.008A3.003 3.003 0 0 1 0 17.006V2.994A2.999 2.999 0 0 1 3.008 0z" /><path d="M17.5 10.5c.828 0 1.5-.784 1.5-1.75S18.328 7 17.5 7 16 7.784 16 8.75s.672 1.75 1.5 1.75zm-8.997 0c-.828 0-1.5-.784-1.5-1.75S7.675 7 8.503 7s1.5.784 1.5 1.75-.672 1.75-1.5 1.75zm2.92 4.432c.09-.142.291-.38.6-.62.751-.588 1.689-.82 2.856-.496a.5.5 0 1 0 .267-.964c-1.49-.414-2.75-.101-3.74.672-.408.319-.682.641-.828.873a.5.5 0 0 0 .844.535z" /></g>
+      </g>
+    )
+  }, 
   IcRefresh: {
     className: 'Icon--IcRefresh',
     viewBox: '0 0 100 100',
@@ -134,6 +143,7 @@ export const IcChevronRight = (props) => <Icon {...props} name="IcChevronRight" 
 export const IcClose = (props) => <Icon {...props} name="IcClose" />;
 export const IcDocuments = (props) => <Icon {...props} name="IcDocuments" />;
 export const IcMenu = (props) => <Icon {...props} name="IcMenu" />;
+export const IcOps = (props) => <Icon {...props} name="IcOps" />;
 export const IcRefresh = (props) => <Icon {...props} name="IcRefresh" />;
 export const IcSearch = (props) => <Icon {...props} name="IcSearch" />;
 export const IcTick = (props) => <Icon {...props} name="IcTick" />;

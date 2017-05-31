@@ -4,7 +4,7 @@
   "author": "Renato Ribeiro <http://github.com/renatorib>",
   "repository": "http://github.com/renatorib/cartolazo",
   "scripts": {
-    "reicons": "reicons -p icons:ic -s assets -b components/Icons",
+    "reicons": "reicons -p icons:ic -s assets -b components/atoms/Icons",
     "dev": "node next.js",
     "prebuild": "yarn reicons",
     "build": "next build",
@@ -16,6 +16,7 @@
     "date-fns": "^1.28.4",
     "humps": "^2.0.0",
     "next": "beta",
+    "normalize-for-search": "^2.0.1",
     "nprogress": "^0.2.0",
     "ramda": "^0.23.0",
     "react": "^15.5.4",

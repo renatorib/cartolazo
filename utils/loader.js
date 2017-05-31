@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoadingState } from '../components';
+import { LoadingState } from '../components/atoms';
 
 export default (condition, message, render) =>
   condition

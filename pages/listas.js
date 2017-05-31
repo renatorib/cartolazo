@@ -6,7 +6,7 @@ import {
   Header, BlockSearch, EmptyState,
   BlockInput, Bottom, BlockLink,
   Page,
-} from '../components';
+} from '../components/atoms';
 import { storage, loader } from '../utils';
 
 const Wrapper = styled.div``;

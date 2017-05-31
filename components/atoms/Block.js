@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { contained, uiprops } from '../utils';
+import { contained, uiprops } from '../../utils';
 
 const ui = uiprops({
   spacing: ['5px', '10px', '15px', '20px', '40px'],
@@ -21,15 +21,15 @@ const Block = ({ href, prefetch, replace, ...props }) => {
 const isLink = props => (!!props.href);
 const BlockElement = styled.div`
   cursor: ${props => isLink(props) ? 'pointer' : 'default'};
-  padding: ${ui('padding', 'spacing', 2)} 0;
+  padding: ${ui('spacing', 'padding', 2)} 0;
   border-bottom: 1px solid #ddd;
   border-top: 1px solid #ddd;
   margin-top: -1px;
   line-height: 25px;
 
-  background: ${ui('theme', 'themeBg', 'light')};
-  color: ${ui('theme', 'themeColor', 'light')};
-  fill: ${ui('theme', 'themeColor', 'light')};
+  background: ${ui('themeBg', 'theme', 'light')};
+  color: ${ui('themeColor', 'theme', 'light')};
+  fill: ${ui('themeColor', 'theme', 'light')};
 
   &:hover {
     opacity: ${props => isLink(props) ? '0.3' : '1'};

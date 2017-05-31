@@ -1,5 +1,5 @@
 import React from 'react';
-import { Block, Right } from '../components';
+import { Block, Right } from '../components/atoms';
 
 export default () => (
   <div>

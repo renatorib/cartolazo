@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Block, Header, Right, Page } from '../components';
+import { Block, Header, Right, Page } from '../components/atoms';
 import { api, loader } from '../utils';
 
 class MaisEscalados extends Component {

@@ -4,7 +4,10 @@ export api from './api';
 export contained from './contained';
 export * as string from './string';
 export * as date from './date';
-export loader from './loader';
 export scouts from './scouts';
 export storage from './storage';
 export uiprops from './uiprops';
+
+export loader from './loader';
+export exists from './exists';
+export renderif from './renderif';

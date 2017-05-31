@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Page, Header } from '../components';
+import { Page, Header } from '../components/atoms';
 import loginApi from '../utils/api/loginApi';
 
 class Scouts extends Component {
