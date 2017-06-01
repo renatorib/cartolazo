@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import normalize from 'normalize-for-search';
 import R from 'ramda';
 import {
-  Header, EmptyState,
+  Header,
   BlockInput, Bottom,
   Page, BlockLink,
 } from '../components/atoms';
