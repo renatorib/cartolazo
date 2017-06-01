@@ -5,11 +5,11 @@
   "repository": "http://github.com/renatorib/cartolazo",
   "scripts": {
     "reicons": "reicons -p icons:ic -s assets -b components/atoms/Icons",
+    "lint": "eslint .",
+    "test": "npm run lint",
     "dev": "node next.js",
-    "prebuild": "npm run reicons",
     "build": "next build",
-    "start": "NODE_ENV=production node next.js",
-    "lint": "eslint ."
+    "start": "NODE_ENV=production node next.js"
   },
   "dependencies": {
     "axios": "^0.16.1",
