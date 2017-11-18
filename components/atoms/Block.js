@@ -5,7 +5,7 @@ import { contained, uiprops } from '../../utils';
 
 const ui = uiprops({
   spacing: ['5px', '10px', '15px', '20px', '40px'],
-  themeBg: { light: '#fff', dark: '#444', cloud: '#f8f8f8', orange: '#e3672a' },
+  themeBg: { light: '#fff', dark: '#444', cloud: '#f8f8f8', orange: '#F2994A' },
   themeColor: { light: '#444', dark: '#fff', cloud: '#444', orange: '#fff' },
 });
 

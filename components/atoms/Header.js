@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { Block, Icons } from '.';
 
-export default ({ children, left, leftLink, leftClick, right, rightLink, rightClick }) => (
+export default ({
+  children, left, leftLink, leftClick, right, rightLink, rightClick, theme = 'orange',
+}) => (
   <Wrapper>
-    <Block theme="orange" padding={3}>
+    <Block theme={theme} padding={3}>
       <div className="left">
         {left && leftLink && <Link href={leftLink}><Icons name={left} /></Link>}
         {left && leftClick && <Icons onClick={leftClick} name={left} />}
@@ -40,4 +42,5 @@ const Title = styled.h1`
   text-align: center;
   padding: 0;
   margin: 0;
+  font-family: 'Rajdhani', 'Roboto', sans-serif;
 `;

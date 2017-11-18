@@ -1,6 +1,7 @@
 export data from './data';
 
 export api from './api';
+export serverApi from './api/server';
 export contained from './contained';
 export * as string from './string';
 export * as date from './date';

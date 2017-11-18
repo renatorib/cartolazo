@@ -87,10 +87,14 @@ class MyDocument extends Document {
     return (
       <html lang="en-US">
         <Head>
-          <title>Cartola Status</title>
+          <title>Cartolazo</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
+          <link rel="shortcut icon" type="image/png" href="/static/favicon.png" />
+          <link rel="icon" type="image/png" href="/static/image.png" />
+          <link rel="apple-touch-icon" type="image/png" href="/static/appicon.png" />
           <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Rajdhani:300,400,600" rel="stylesheet" />
         </Head>
         <body>
           <Main />

@@ -30,6 +30,7 @@ class Listas extends Component {
   };
 
   createList = (name) => {
+    if (!name || name === '' || name.length > 100) return;
     const list = { id: v4(), name, times: [] };
     this.setState({
       lists: [...this.state.lists, list],

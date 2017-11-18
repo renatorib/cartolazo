@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React, { Component } from 'react';
 
 import { Block, BlockLink, Header, Page, Right, Countdown } from '../components/atoms';
@@ -19,20 +20,27 @@ const renderLink = link => (
 );
 
 class Index extends Component {
+  static async getInitialProps() {
+    const { data } = await api.get('/mercado/status');
+    return { status: data };
+  }
+
   state = {
     status: null,
   };
 
   componentWillMount() {
-    api.setState('/mercado/status', 'status', this);
+    // api.setState('/mercado/status', 'status', this);
   }
 
   render() {
-    const { status } = this.state;
+    const { status } = this.props;
 
     return (
       <Page>
-        <Header>Cartolazo</Header>
+        <Header>
+          CARTOLAZO
+        </Header>
 
         {loader(!status, null, () => {
           const { rodadaAtual, statusMercado, fechamento: { timestamp } } = status;

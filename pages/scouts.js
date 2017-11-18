@@ -61,7 +61,9 @@ class Scouts extends Component {
                   </span>
                   <span className="item">{atleta.apelido}</span>
                   <Right className="item">
-                    <span className="small">({(atleta.scout[selectedScout] / atleta.jogosNum)}/J)</span>
+                    <span className="small">
+                      ({(atleta.scout[selectedScout] / atleta.jogosNum).toFixed(1)}/J)
+                    </span>
                     <strong> {atleta.scout[selectedScout]}</strong>
                   </Right>
                 </Block>
