@@ -39,7 +39,7 @@ class Scouts extends Component {
         <Wrapper>
           {loader(!data, 'Carregando atletas...', () => (
             <div>
-              <Block theme="cloud">
+              <Block sticky theme="cloud">
                 <strong>Selecione:</strong>
                 <Right>
                   <select

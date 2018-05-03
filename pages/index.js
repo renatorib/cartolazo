@@ -32,14 +32,6 @@ class Index extends Component {
     return { status: data }
   }
 
-  state = {
-    status: null,
-  }
-
-  componentWillMount() {
-    // api.setState('/mercado/status', 'status', this);
-  }
-
   render() {
     const { status } = this.props
 

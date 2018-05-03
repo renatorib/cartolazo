@@ -3,7 +3,7 @@ import { decamelizeKeys, camelizeKeys } from 'humps'
 
 let baseURL
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'http://cartolazo.now.sh/api/cartola?url='
+  baseURL = 'https://cartolazo.now.sh/api/cartola?url='
 } else {
   baseURL = 'http://localhost:3000/api/cartola?url='
 }

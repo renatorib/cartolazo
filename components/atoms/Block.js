@@ -24,14 +24,17 @@ const isLink = props => !!props.href
 const BlockElement = styled.div`
   cursor: ${props => (isLink(props) ? 'pointer' : 'default')};
   padding: ${ui('spacing', 'padding', 2)} 0;
-  border-bottom: 1px solid #ddd;
-  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
   margin-top: -1px;
   line-height: 25px;
 
   background: ${ui('themeBg', 'theme', 'light')};
   color: ${ui('themeColor', 'theme', 'light')};
   fill: ${ui('themeColor', 'theme', 'light')};
+
+  position: ${props => (props.sticky ? 'sticky' : 'block')};
+  top: ${props => (props.sticky ? '-1px' : 'auto')};
 
   &:hover {
     opacity: ${props => (isLink(props) ? '0.3' : '1')};
