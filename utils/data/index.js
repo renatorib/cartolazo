@@ -1,7 +1,9 @@
 /* eslint-disable quote-props */
 
 export const scouts = {
-  'A': 'Assistências',
-};
+  A: 'Assistências',
+}
 
-export const foo = 'bar';
+export const foo = 'bar'
+
+export default scouts

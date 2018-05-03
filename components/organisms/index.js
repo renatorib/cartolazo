@@ -1,1 +1,1 @@
-export TeamSearchResults from './TeamSearchResults';
+export TeamSearchResults from './TeamSearchResults'

@@ -1,17 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 export default ({ children, ...restProps }) => (
   <Wrapper {...restProps}>
     <div className="spacer" />
     <div className="fixed">{children}</div>
   </Wrapper>
-);
+)
 
 const Wrapper = styled.div`
   .spacer {
     width: 100%;
-    height: ${props => props.height ? `${props.height}px` : '60px'}
+    height: ${props => (props.height ? `${props.height}px` : '60px')};
   }
 
   .fixed {
@@ -20,4 +20,4 @@ const Wrapper = styled.div`
     left: 0;
     bottom: 0;
   }
-`;
+`

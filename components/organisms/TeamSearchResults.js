@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Block, Icons } from '../atoms';
+import React from 'react'
+import styled from 'styled-components'
+import { Block, Icons } from '../atoms'
 
 const TeamSearchResults = ({ data, onClose, onSelect, icon }) => {
-  const handleSelect = time => () => onSelect && onSelect(time);
+  const handleSelect = time => () => onSelect && onSelect(time)
 
   return (
     <Wrapper>
@@ -13,10 +13,21 @@ const TeamSearchResults = ({ data, onClose, onSelect, icon }) => {
         </Block>
       )}
       {data.map(time => (
-        <Block key={time.timeId} onClick={handleSelect(time)} theme="light" className="time">
-          <img src={time.urlEscudoPng || time.urlEscudoPlaceholderPng} alt="" height="30px" width="30px" />
+        <Block
+          key={time.timeId}
+          onClick={handleSelect(time)}
+          theme="light"
+          className="time"
+        >
+          <img
+            src={time.urlEscudoPng || time.urlEscudoPlaceholderPng}
+            alt=""
+            height="30px"
+            width="30px"
+          />
           <div className="nome">
-            <strong>{time.nome}</strong><br />
+            <strong>{time.nome}</strong>
+            <br />
             <small>{time.nomeCartola}</small>
           </div>
           {icon && (
@@ -27,8 +38,8 @@ const TeamSearchResults = ({ data, onClose, onSelect, icon }) => {
         </Block>
       ))}
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   .time > div {
@@ -51,6 +62,6 @@ const Wrapper = styled.div`
   .icon svg {
     fill: #ddd;
   }
-`;
+`
 
-export default TeamSearchResults;
+export default TeamSearchResults

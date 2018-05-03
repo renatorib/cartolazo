@@ -1,46 +1,56 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Block, Icons } from '.';
+import React from 'react'
+import styled from 'styled-components'
+import { Block, Icons } from '.'
 
 class BlockInput extends React.Component {
   state = {
     value: '',
-  };
-
-  bindField = name => (e) => {
-    const { onChange } = this.props;
-
-    this.setState({ [name]: e.target.value });
-    onChange && onChange(e, e.target.value);
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { onSubmit, clearOnSubmit } = this.props;
+  bindField = name => e => {
+    const { onChange } = this.props
 
-    onSubmit && onSubmit(this.state.value);
-    clearOnSubmit && this.setState({ value: '' });
-  };
+    this.setState({ [name]: e.target.value })
+    onChange && onChange(e, e.target.value)
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const { onSubmit, clearOnSubmit } = this.props
+
+    onSubmit && onSubmit(this.state.value)
+    clearOnSubmit && this.setState({ value: '' })
+  }
 
   render() {
-    const { value } = this.state;
+    const { value } = this.state
     const {
-      icon, children, type, onChange, clearOnSubmit, onSubmit,
+      icon,
+      // children,
+      type,
+      // onChange,
+      // clearOnSubmit,
+      // onSubmit,
       ...restProps
-    } = this.props;
+    } = this.props
 
     return (
       <Wrapper>
         <Block {...restProps} theme="cloud" className="search">
           <form onSubmit={this.handleSubmit}>
-            <input type={type || 'text'} onChange={this.bindField('value')} value={value} {...restProps} />
+            <input
+              type={type || 'text'}
+              onChange={this.bindField('value')}
+              value={value}
+              {...restProps}
+            />
             <button type="submit">
               <Icons name={icon} size={25} />
             </button>
           </form>
         </Block>
       </Wrapper>
-    );
+    )
   }
 }
 
@@ -70,6 +80,6 @@ const Wrapper = styled.div`
     border: none;
     padding: 13px;
   }
-`;
+`
 
-export default BlockInput;
+export default BlockInput

@@ -1,4 +1,3 @@
-
 export default {
   a: 'Assistência',
   cA: 'Cartão amarelo',
@@ -18,4 +17,4 @@ export default {
   pP: 'Penalti perdido',
   rB: 'Roubada de bola',
   sG: 'Sem sofrer gols',
-};
+}

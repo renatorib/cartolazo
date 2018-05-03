@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Block, Icons } from '.';
+import React from 'react'
+import styled from 'styled-components'
+import { Block, Icons } from '.'
 
-export default ({ icon, children, ...restProps }) => (
+export default ({ ...restProps }) => (
   <Wrapper>
     <Block {...restProps} theme="cloud" className="search">
       <Icons name="IcSearch" size={20} />
       <input type="text" placeholder="Pesquisar" {...restProps} />
     </Block>
   </Wrapper>
-);
+)
 
 const Wrapper = styled.div`
   .search {
@@ -32,4 +32,4 @@ const Wrapper = styled.div`
     background: transparent;
     border: none;
   }
-`;
+`

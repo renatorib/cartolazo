@@ -1,10 +1,6 @@
 {
-  "presets": [
-    "next/babel"
-  ],
-  "plugins": [
-    "transform-export-extensions"
-  ],
+  "presets": ["next/babel"],
+  "plugins": ["transform-export-extensions"],
   "env": {
     "test": {
       "presets": ["es2015", "next/babel"]

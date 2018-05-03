@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import distanceInWords from 'date-fns/distance_in_words';
-import ptLocale from 'date-fns/locale/pt';
+import React, { Component } from 'react'
+import distanceInWords from 'date-fns/distance_in_words'
+import ptLocale from 'date-fns/locale/pt'
 
-const calculate = (targetDate) => {
-  const today = new Date();
-  const target = new Date(targetDate);
+const calculate = targetDate => {
+  const today = new Date()
+  const target = new Date(targetDate)
 
-  return distanceInWords(today, target, { locale: ptLocale });
-};
+  return distanceInWords(today, target, { locale: ptLocale })
+}
 
 class Countdown extends Component {
-  interval = null;
+  interval = null
 
   state = {
     countdown: calculate(this.props.date),
-  };
+  }
 
-  recalculate = () =>
-    this.setState({ countdown: calculate(this.props.date) });
+  recalculate = () => this.setState({ countdown: calculate(this.props.date) })
 
   componenWillMount() {
-    const interval = this.props.interval || 1000;
-    this.interval = setInterval(this.recalculate, interval);
+    const interval = this.props.interval || 1000
+    this.interval = setInterval(this.recalculate, interval)
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
   }
 
   render() {
-    return <span>{this.state.countdown}</span>;
+    return <span>{this.state.countdown}</span>
   }
 }
 
-export default Countdown;
+export default Countdown

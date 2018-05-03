@@ -1,49 +1,58 @@
 /* eslint-disable global-require */
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { Block, BlockLink, Header, Page, Right, Countdown } from '../components/atoms';
-import { api, loader } from '../utils';
+import {
+  Block,
+  BlockLink,
+  Header,
+  Page,
+  Right,
+  Countdown,
+} from '../components/atoms'
+import { api, loader } from '../utils'
 
 const linksClosed = [
   { href: '/parciais', children: 'Parciais dos Atletas' },
   { href: '/listas', children: 'Parciais dos Times' },
-];
+]
 
 const linksOpened = [
   { href: '/mais-escalados', children: 'Mais escalados da Rodada' },
   { href: '/partidas', children: 'Partidas da Rodada' },
   { href: '/scouts', children: 'Scouts dos Atletas' },
-];
+]
 
 const renderLink = link => (
   <BlockLink key={link.href} icon="IcChevronRightTiny" {...link} />
-);
+)
 
 class Index extends Component {
   static async getInitialProps() {
-    const { data } = await api.get('/mercado/status');
-    return { status: data };
+    const { data } = await api.get('/mercado/status')
+    return { status: data }
   }
 
   state = {
     status: null,
-  };
+  }
 
   componentWillMount() {
     // api.setState('/mercado/status', 'status', this);
   }
 
   render() {
-    const { status } = this.props;
+    const { status } = this.props
 
     return (
       <Page>
-        <Header>
-          CARTOLAZO
-        </Header>
+        <Header>CARTOLAZO</Header>
 
         {loader(!status, null, () => {
-          const { rodadaAtual, statusMercado, fechamento: { timestamp } } = status;
+          const {
+            rodadaAtual,
+            statusMercado,
+            fechamento: { timestamp },
+          } = status
 
           return (
             <div>
@@ -52,7 +61,10 @@ class Index extends Component {
                 <Right>
                   {statusMercado === 1 ? (
                     <small>
-                      Mercado fecha <strong>em <Countdown date={timestamp * 1000} /></strong>
+                      Mercado fecha{' '}
+                      <strong>
+                        em <Countdown date={timestamp * 1000} />
+                      </strong>
                     </small>
                   ) : (
                     <strong className="small red">
@@ -68,11 +80,11 @@ class Index extends Component {
               {statusMercado !== 1 && linksClosed.map(renderLink)}
               {linksOpened.map(renderLink)}
             </div>
-          );
+          )
         })}
       </Page>
-    );
+    )
   }
 }
 
-export default Index;
+export default Index

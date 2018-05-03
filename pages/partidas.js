@@ -1,34 +1,32 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import R from 'ramda';
-import { Block, Header, Page } from '../components/atoms';
-import { api, loader, date } from '../utils';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import R from 'ramda'
+import { Block, Header, Page } from '../components/atoms'
+import { api, loader, date } from '../utils'
 
-const sortByDate = prop => R.sortWith([
-  R.ascend(R.prop(prop)),
-]);
+const sortByDate = prop => R.sortWith([R.ascend(R.prop(prop))])
 
 class Partidas extends Component {
   state = {
     partidas: null,
     showing: {},
-  };
-
-  componentDidMount() {
-    api.setState('/partidas', 'partidas', this);
   }
 
-  show = (id) => {
+  componentDidMount() {
+    api.setState('/partidas', 'partidas', this)
+  }
+
+  show = id => {
     this.setState(prev => ({
       showing: {
         ...prev.showing,
         [id]: !prev.showing[id],
       },
-    }));
+    }))
   }
 
   render() {
-    const { partidas } = this.state;
+    const { partidas } = this.state
 
     return (
       <Page>
@@ -56,26 +54,37 @@ class Partidas extends Component {
           ))}
         </Wrapper>
       </Page>
-    );
+    )
   }
 }
 
+const posColor = pos => {
+  if (pos <= 4) return 'green'
+  if (pos >= 16) return 'red'
 
-const posColor = (pos) => {
-  if (pos <= 4) return 'green';
-  if (pos >= 16) return 'red';
-
-  return '';
-};
+  return ''
+}
 
 const Partida = ({
-  mandante, visitante, aproveitamentoMandante,
-  aproveitamentoVisitante, partidaData, local,
-  placarOficialMandante, placarOficialVisitante,
-  clubeCasaPosicao, clubeVisitantePosicao,
-  showing, show, id,
+  mandante,
+  visitante,
+  aproveitamentoMandante,
+  aproveitamentoVisitante,
+  partidaData,
+  local,
+  placarOficialMandante,
+  placarOficialVisitante,
+  clubeCasaPosicao,
+  clubeVisitantePosicao,
+  showing,
+  show,
+  id,
 }) => (
-  <Block padding={showing[id] ? 2 : 1} className="partida" onClick={() => show(id)}>
+  <Block
+    padding={showing[id] ? 2 : 1}
+    className="partida"
+    onClick={() => show(id)}
+  >
     {showing[id] && (
       <div className="data small">
         <span className="bold">{date.formatDate(partidaData, 'dd/mm')} </span>
@@ -90,14 +99,17 @@ const Partida = ({
           {clubeCasaPosicao}º
         </span>
         <span className="bullets">
-          {aproveitamentoMandante.map((apv, i) => i >= 2 && (
-            <span key={i} className={`bullet ${apv} ${i === 4 && 'big'}`} />
-          ))}
+          {aproveitamentoMandante.map(
+            (apv, i) =>
+              i >= 2 && (
+                <span key={i} className={`bullet ${apv} ${i === 4 && 'big'}`} />
+              )
+          )}
         </span>
       </span>
 
       <span className="time">
-        <span className="nome">{mandante.abreviacao}{' '}</span>
+        <span className="nome">{mandante.abreviacao} </span>
         <img src={mandante.escudos['60x60']} height="20" alt="" />
       </span>
 
@@ -109,14 +121,20 @@ const Partida = ({
 
       <span className="time">
         <img src={visitante.escudos['60x60']} height="20" alt="" />
-        <span className="nome">{' '}{visitante.abreviacao}</span>
+        <span className="nome"> {visitante.abreviacao}</span>
       </span>
 
       <span className="retrospect">
         <span className="bullets">
-          {R.reverse(aproveitamentoVisitante).map((apv, i) => i < 3 && (
-            <span key={i} className={`bullet ${apv} ${i === 0 ? 'big' : ''}`} />
-          ))}
+          {R.reverse(aproveitamentoVisitante).map(
+            (apv, i) =>
+              i < 3 && (
+                <span
+                  key={i}
+                  className={`bullet ${apv} ${i === 0 ? 'big' : ''}`}
+                />
+              )
+          )}
         </span>
 
         <span className={`pos ${posColor(clubeVisitantePosicao)}`}>
@@ -125,7 +143,7 @@ const Partida = ({
       </span>
     </div>
   </Block>
-);
+)
 
 const Wrapper = styled.div`
   .partida {
@@ -183,10 +201,19 @@ const Wrapper = styled.div`
     border-radius: 99px;
     background: #fafafa;
 
-    &.d { background-color: red; }
-    &.v { background-color: green; }
-    &.e { background-color: #ccc; }
-    &.big { height: 8px; width: 8px; }
+    &.d {
+      background-color: red;
+    }
+    &.v {
+      background-color: green;
+    }
+    &.e {
+      background-color: #ccc;
+    }
+    &.big {
+      height: 8px;
+      width: 8px;
+    }
   }
 
   .pos {
@@ -213,6 +240,6 @@ const Wrapper = styled.div`
       display: none;
     }
   }
-`;
+`
 
-export default Partidas;
+export default Partidas

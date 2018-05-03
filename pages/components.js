@@ -1,5 +1,5 @@
-import React from 'react';
-import { Block, Right } from '../components/atoms';
+import React from 'react'
+import { Block, Right } from '../components/atoms'
 
 export default () => (
   <div>
@@ -10,7 +10,9 @@ export default () => (
 
     <h1>Block Right</h1>
     <div>
-      <Block>Block <Right>Right</Right></Block>
+      <Block>
+        Block <Right>Right</Right>
+      </Block>
     </div>
   </div>
-);
+)
